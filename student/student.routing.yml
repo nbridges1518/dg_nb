@@ -4,4 +4,4 @@ student.form:
   _title: 'Student Registration Form'
   _form: '\Drupal\student\Form\StudentForm'
  requirements:
-  _permission: 'access content'
+  _permission: 'access user profile'
