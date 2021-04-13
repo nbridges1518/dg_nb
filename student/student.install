@@ -4,48 +4,61 @@
  * create table mytable
  */
 function student_schema() {
-  $schema['student'] = array(
-    'fields' => array(
-      'id' => array(
+  $schema['student'] = [ 
+    'description' => 'Mysql student table',
+    'fields' => [ 
+      'id' => [
+        'description' => 'Input row id.',
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
-      ),
-       'uid' => array(
+      ],
+       'uid' => [
+        'description' => 'user id.',
         'type' => 'int',
         'length' => 10,
         'not null' => TRUE,
        
-      ),
-      'name' => array(
-        'type' => 'varchar',
-        'length' => 32,
-        'not null' => TRUE,
-        'default' => '',
-      ),
-      'email' => array(
+      ],
+      'name' => [
+        'description' => 'User Name',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-      ),
-      'phone' => array(
+      ],
+      'email' => [
+        'description' => 'User email',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-      ),
-      'dob' => array(
+      ],
+      'phone' => [
+        'description' => 'User Phone Number',
         'type' => 'varchar',
         'length' => 255,
         'not null' => TRUE,
         'default' => '',
-      ),      
-    ),
-    'primary key' => array(
+      ],
+      'dob' => [
+        'description' => 'User Birthdate',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+     ],      
+    ],
+    'primary key' => [
       'id',
-    ),
-  );
+    ],
+    'foreign keys' => [
+        'table' => 'users',
+        'columns' => [
+          'uid' => 'uid',
+        ],
+      ],    
+  ];
 
   return $schema;
 }
