@@ -2,6 +2,6 @@ student.form:
  path: '/student/myform'
  defaults:
   _title: 'Student Registration Form'
-  _form: '\Drupal\student\Form\StudentForm'
+  _form: '\Drupal\student\Form\StudentSignUpForm'
  requirements:
   _permission: 'access user profile'
