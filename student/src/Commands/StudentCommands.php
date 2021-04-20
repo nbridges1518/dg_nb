@@ -11,7 +11,6 @@
  * @link     test
  * @return   /custom/student/src/Commands/StudentCommands.php
  */
-
 namespace Drupal\student\Commands;
 
 use Drush\Commands\DrushCommands;
@@ -31,35 +30,28 @@ use Drush\Commands\DrushCommands;
  * @package  Student
  * @author   Neil Bridges <neil@discoverygarden.com>
  * @link     Student 
- * @license  student  
+ * @license  student 
+ * @var      Drupal\student\Commands 
  * @return   /custom/student/src/Commands/StudentCommands.php      
  */
-
-class StudentCommands extends DrushCommands
-{
+class StudentCommands extends DrushCommands {
 
     /**
      * Drush command that displays the given text.
      *
-     * @command  student_custom_commands:student
-     * @aliases  drush-student student
-     * @usage    student_custom_commands: student
-     * @return   /custom/student/src/Commands/StudentCommands.php
-     * @link
-     * @package 
-     * @author
-     * @license   
-     * @category      
+     * @command student_custom_commands:student
+     * @aliases drush-student student
+     * @usage   student_custom_commands: student
+     * @return  /custom/student/src/Commands/StudentCommands.php
      */
-    public function student()
-    {
-        $query = \Drupal::database()->select('student', 't');
-        $result =  $query->fields('t')        
-            ->execute()
-            ->fetchAssoc();
-           
-        
-        $this->output()->writeln($result);
-    }
+ public function student() {
+  
+     $query = \Drupal::database()->select('student', 't');
+     $result = $query->fields('t')        
+          ->execute()
+          ->fetchAssoc();
+       
+     $this->output()->writeln($result);
+  }
 }
 

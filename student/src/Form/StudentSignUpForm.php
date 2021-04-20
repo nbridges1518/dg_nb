@@ -11,7 +11,6 @@
   * @link     test
   * @return   /custom/student/src/Form/StudentSignUpForm.php
   */  
- 
 namespace Drupal\student\Form;
 
 use Drupal\Core\Form\FormBase;
@@ -29,11 +28,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @author   Neil Bridges <neil@discoverygarden.com>
  * @license  student
  * @link     Student 
+ * @var      Drupal\student\Form
  * @return   /custom/student/src/Form/StudentSignUpForm.php      
  */ 
 class StudentSignUpForm extends FormBase
 {
-        
+                 
     protected $account;
 
     /**
@@ -47,9 +47,7 @@ class StudentSignUpForm extends FormBase
      * @license  student  
      * @return   /custom/student/src/Form/StudentSignUpForm.php      
      */    
- 
-    public function __construct(AccountInterface $account) 
-    {
+    public function __construct(AccountInterface $account) {
         $this->account = $account;
     }
 
@@ -63,11 +61,10 @@ class StudentSignUpForm extends FormBase
      * @license  student  
      * @return   /custom/student/src/Form/StudentSignUpForm.php      
      */
-    public static function create(ContainerInterface $container) 
-    {
+    public static function create(ContainerInterface $container) {
         // Instantiates this form class.
         return new static(
-            // Load the service required to construct this class.
+        // Load the service required to construct this class.
             $container->get('current_user')
         );
     }
@@ -82,11 +79,9 @@ class StudentSignUpForm extends FormBase
      * @license  student  
      * @return   /custom/student/src/Form/StudentSignUpForm.php      
      */
-    public function getFormId() 
-    {
+    public function getFormId() {
         return 'student_sign_up_form';
     }
-
    
     /** 
      * Build Form Description
@@ -101,48 +96,45 @@ class StudentSignUpForm extends FormBase
      * $form_state student           
      * @return   /custom/student/src/Form/StudentSignUpForm.php      
      */
-    public function buildForm(array $form, FormStateInterface $form_state) 
-    {
+ public function buildForm(array $form, FormStateInterface $form_state) {
 
         // Get current user data.
-        $uid = $this->account->id();
-        $current_user = $this->account->getAccountName();
-                
-  
-          $form['uid'] = array(
+     $uid = $this->account->id();
+     $current_user = $this->account->getAccountName();
+ 
+     $form['uid'] = [
           '#type' => 'hidden',
           '#title' => t('User ID:'),
           '#default_value' => "$uid",
           '#required' => true,
-          );
-          $form['name'] = array(
+          ];
+     $form['name'] = [
           '#type' => 'textfield',
           '#title' => t('Student Name:'),
           '#default_value' => "$current_user",
           '#required' => true,
-          );
-          $form['email'] = array(
+          ];
+     $form['email'] = [
           '#type' => 'email',
           '#title' => t('Email Address:'),
           '#required' => true,
-          );
-          $form['phone'] = array (
+          ];
+     $form['phone'] = [
           '#type' => 'tel',
           '#title' => t('Mobile Number:'),
-         );
-          $form['dob'] = array (
+         ];
+     $form['dob'] = [
           '#type' => 'date',
           '#title' => t('DOB:'),
           '#required' => true,
-          );
-          $form['actions']['#type'] = 'actions';
-          $form['actions']['submit'] = array(
+          ];
+     $form['actions']['#type'] = 'actions';
+     $form['actions']['submit'] = [
           '#type' => 'submit',
           '#value' => $this->t('Submit'),
           '#button_type' => 'primary',
-          );
+          ];
           return $form;
-    
     }
   
     /**
@@ -158,20 +150,21 @@ class StudentSignUpForm extends FormBase
      * $form_state active
      * @return   /custom/student/src/Form/StudentSignUpForm.php
      */
-    public function submitForm(array &$form, FormStateInterface $form_state) 
+    public function submitForm(array &$form, FormStateInterface $form_state)
     {
-        $data = array(
-          'uid' => $form_state->getValue('uid'),
-          'name' => $form_state->getValue('name'),
-          'email' => $form_state->getValue('email'),
-          'phone' => $form_state->getValue('phone'),
-          'dob' => $form_state->getValue('dob')
-          );
+
+        $data = [
+         'uid' => $form_state->getValue('uid'),
+         'name' => $form_state->getValue('name'),
+         'email' => $form_state->getValue('email'),
+         'phone' => $form_state->getValue('phone'),
+         'dob' => $form_state->getValue('dob')
+        ];
  
-         //insert data to database
-         \Drupal::database()->insert('student')->fields($data)->execute();
+        //insert data to database
+        \Drupal::database()->insert('student')->fields($data)->execute();
  
-         // show message
-         \Drupal::messenger()->addStatus('Succesfully saved');
+        // show message
+        \Drupal::messenger()->addStatus('Succesfully saved');
     }
 }
